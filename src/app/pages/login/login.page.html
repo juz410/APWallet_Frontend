@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <ion-item>
+        <ion-label position="stacked">APKey</ion-label>
+        <ion-input placeholder="APKEY" type="text" name="username" [(ngModel)]="username" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Password</ion-label>
+        <ion-input placeholder="********" type="password" name="password" [(ngModel)]="password" required></ion-input>
+      </ion-item>
+      <div class="ion-padding">
+        <ion-button type="submit" expand="block" [disabled]="!loginForm.valid">Login</ion-button>
+      </div>
+    </form>
+  </ion-card>
+  
+  
+</ion-content>
