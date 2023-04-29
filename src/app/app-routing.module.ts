@@ -21,9 +21,29 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'registration',
-    loadChildren: () => import('./pages/registration/registration.module').then( m => m.RegistrationPageModule)
+    path: 'home',
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
+  {
+    path: 'card',
+    loadChildren: () => import('./pages/card/card.module').then( m => m.CardPageModule)
+  },
+  {
+    path: 'top-up',
+    loadChildren: () => import('./pages/top-up/top-up.module').then( m => m.TopUpPageModule)
+  },
+  {
+    path: 'transactions-history',
+    loadChildren: () => import('./pages/transactions-history/transactions-history.module').then( m => m.TransactionsHistoryPageModule)
+  },
+  {
+    path: 'instant-transfer',
+    loadChildren: () => import('./pages/instant-transfer/instant-transfer.module').then( m => m.InstantTransferPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  }
 ];
 @NgModule({
   imports: [

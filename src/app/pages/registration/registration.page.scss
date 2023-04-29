@@ -1,0 +1,63 @@
+.otp-wrapper {
+  display: flex;
+  justify-content: center;
+
+  .otp {
+    font-size: 8vw;
+    margin: 20px 4px;
+    max-width: 12vw;
+    padding: 12px;
+    padding-bottom: 4px;
+    background: var(--ion-item-background);
+    caret-color: transparent;
+    border: none;
+    border-bottom: 8px solid var(--ion-color-primary);
+    text-align: center;
+
+    &:focus {
+      border-bottom-color: var(--ion-color-medium);
+      background: var(--ion-color-step-350);
+    }
+  }
+}
+
+code-input {
+  --item-spacing: 10px;
+  --item-height: 3em;
+  --item-border: none;
+  --item-border-bottom: 2px solid #dddddd;
+  --item-border-has-value: none;
+  --item-border-bottom-has-value: 2px solid #888888;
+  --item-border-focused: none;
+  --item-border-bottom-focused: 2px solid #809070;
+  --item-shadow-focused: none;
+  --item-border-radius: 0px;
+}
+
+.ion-invalid.ion-touched ion-label {
+  color: var(--ion-color-danger);
+}
+
+/** For form invalid field for Angular*/
+input.ng-invalid.ng-touched{
+  border: 1px solid red;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .loading-text {
+    margin-top: 20px;
+    text-align: center;
+    width: 250px;
+    color: var(--ion-color-primary);
+    font-size: 18px;
+  }
+}

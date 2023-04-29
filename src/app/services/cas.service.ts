@@ -24,8 +24,11 @@ export class CasService {
   ) { }
 
   async isAuthenticated(): Promise<boolean> {
-    console.log("AAA")
     return this.storage.get('tgt').then(tgt => !!tgt);
+  }
+
+  async isUser(): Promise<boolean> {
+    return this.storage.get('user').then(user => !!user);
   }
   
   getTGT(username?: string, password?: string): Observable<string> {
@@ -42,7 +45,7 @@ export class CasService {
           ? of(res.headers.get('Location').split('/').pop())
           : username && password
             ? throwError(() => new Error(res))
-            : ( console.log(res),EMPTY)),
+            : ( this.component.toastMessage(res,'danger'),EMPTY)),
         tap(tgt => {
           // Resolve both Promises
           console.log(tgt)
