@@ -1,13 +1,75 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>card</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="top-section">
+    <div *ngIf="user; else loadingBalance" class="balance-section">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">card</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <div class="balance-label">
+        Total Balance:
+      </div>
+      <div class="balance-amount">
+
+        {{ user.balance | currency:'MYR':'symbol':'1.2-2' }}
+      </div>
+    </div>
+    <ng-template #loadingBalance>
+      <div class="loading-spinner">
+        <ion-spinner color="primary"></ion-spinner>
+        <p class="loading-text glob-text-bold">Loading balance......</p>
+      </div>
+    </ng-template>
+  </div>
+
+
+  <ion-card class="bottom-section">
+    <ion-card-header class="bottom-ion-header">
+      <div class="bottom-header">
+        Available Cards
+      </div>
+      <div class="button-section">
+        <ion-fab-button (click)="addNewCard()" fill="clear" size="small">
+          <ion-icon name="add-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-text class="button-text">Add New Card</ion-text>
+      </div>
+    </ion-card-header>
+    <ion-card-content class="bottom-ion-card-content">
+      <cdk-virtual-scroll-viewport class="bottom-viewport" itemSize="56" minBufferPx="900" maxBufferPx="1350">
+        <ion-list *ngIf="cards$ | async as cards; else loadingCards" class="bottom-content-ion-list">
+          <ng-container *ngIf="cards.length !== 0 ; else noCards">
+            <div *cdkVirtualFor="let card of cards">
+              <ion-card class="bottom-contents">
+
+                <ion-item class="ion-no-padding" lines="none">
+                  <ion-icon name="card-outline" size="large"></ion-icon>
+                  <div class="bottom-labels-container">
+                    <label>
+                      Credit/debit card
+                    </label>
+                    <ion-label class="bottom-labels-card-number">
+                      ************{{card.card_number.slice(-4)}}
+                    </ion-label>
+                  </div>
+                  <ion-button (click)="cardOptions(card)" color="medium" fill="clear" slot="end">
+                    <ion-icon size="large" name="ellipsis-vertical-outline"></ion-icon>
+                  </ion-button>
+                </ion-item>
+              </ion-card>
+            </div>
+          </ng-container>
+
+        </ion-list>
+      </cdk-virtual-scroll-viewport>
+
+      <ng-template #noCards>
+        <ion-label>NO CARDS</ion-label>
+      </ng-template>
+
+      <ng-template #loadingCards>
+        <div class="loading-spinner">
+          <ion-spinner color="primary"></ion-spinner>
+          <p class="loading-text glob-text-bold">Loading user cards......</p>
+        </div>
+      </ng-template>
+
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -1,0 +1,45 @@
+.danger-alert {
+  .alert-wrapper {
+    .alert-head {
+      border-bottom: 1px solid var(--ion-color-danger);
+    }
+
+    .alert-message {
+      padding-top: 10px !important;
+      padding-bottom: 0 !important;
+    }
+
+    .alert-button-group {
+      .cancel {
+        color: var(--ion-color-medium);
+      }
+
+      .danger {
+        color: var(--ion-color-danger);
+      }
+    }
+  }
+}
+
+.success-alert {
+  .alert-wrapper {
+    .alert-head {
+      border-bottom: 1px solid var(--ion-color-success);
+    }
+
+    .alert-message {
+      padding-top: 10px !important;
+      padding-bottom: 0 !important;
+    }
+
+    .alert-button-group {
+      .cancel {
+        color: var(--ion-color-medium);
+      }
+
+      .success {
+        color: var(--ion-color-success);
+      }
+    }
+  }
+}

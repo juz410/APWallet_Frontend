@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { CardPageRoutingModule } from './card-routing.module';
 
 import { CardPage } from './card.page';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CardPageRoutingModule
+    CardPageRoutingModule,
+    ScrollingModule,
+    
   ],
   declarations: [CardPage]
 })

@@ -6,3 +6,10 @@ export interface User{
   balance: number
   registered_at: Date
 }
+
+export interface Card{
+  card_id: number,
+  card_number: string,
+  registered_at: Date,
+  user: User
+}
