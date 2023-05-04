@@ -21,7 +21,18 @@ const routes: Routes = [
       {
         path: 'card',
         canActivate: [AuthGuard],
-        loadChildren: () => import('../card/card.module').then(m => m.CardPageModule)
+        children: [
+          {
+            path: 'add-new-card',
+            canActivate: [AuthGuard],
+            loadChildren: () => import('../card/add-new-card/add-new-card.module').then(m => m.AddNewCardPageModule),
+          },
+          {
+            path: '',
+            loadChildren: () => import('../card/card.module').then(m => m.CardPageModule)
+          }
+        ],
+    
       },
       {
         path: 'profile',

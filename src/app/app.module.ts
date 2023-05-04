@@ -14,7 +14,8 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   imports: [
     BrowserModule, 
-    IonicModule.forRoot(), 
+    IonicModule.forRoot({scrollPadding: false,
+      scrollAssist: false}), 
     AppRoutingModule, 
     HttpClientModule, 
     IonicStorageModule.forRoot(),

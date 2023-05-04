@@ -60,7 +60,6 @@ export class WsApiService {
     };
 
     const url = options.url + endpoint;
-    console.log(url)
     const opt = {
       params: options.params,
       withCredentials: options.withCredentials,

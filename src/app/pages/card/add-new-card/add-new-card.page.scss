@@ -5,10 +5,35 @@ ion-content {
 
 
 .top-section {
-  height: 20%;
+  min-height: 20% !important;
+  color: var(--ion-color-light);
+}
+
+.top-section-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+
 
 }
 
+.top-section-card {
+  border-radius: 1.5rem;
+  // padding-bottom: 0.75rem;
+  // padding-top: 0.75rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+
+}
+
+.top-labels-container{
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    font-weight: bold;
+}
 
 ion-header {
   display: flex;
@@ -31,28 +56,14 @@ ion-title {
   font-size: 24px;
 }
 
-.balance-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 150px;
-  color: var(--ion-color-light);
-}
 
-.balance-label {
-  font-size: 24px;
-}
 
-.balance-amount {
-  font-size: 48px;
-}
 
 .button-section {
   display: flex;
   flex-direction: column;
-  justify-content: center;  
-  align-items: center;  
+  justify-content: center;
+  align-items: center;
   margin-top: 16px;
 
 
@@ -87,7 +98,7 @@ ion-title {
   border-radius: 24px 24px 0px 0px;
   margin: 0px;
   background-color: #f4f6fe !important;
-  height: calc(100% - 20%);
+  min-height: calc(100% - 20%) !important;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -115,7 +126,8 @@ ion-title {
   .bottom-content-ion-header {
     background-color: #f4f6fe !important;
   }
-  .bottom-content-ion-list{
+
+  .bottom-content-ion-list {
     background-color: #f4f6fe !important;
 
   }
@@ -130,40 +142,28 @@ ion-title {
     padding: 8px;
   }
 
-  .bottom-ion-card-content{
-    height: 100%;
-  }
-
-  .bottom-viewport {
-    height: 100%;
-    width: 100%;
-    
-  }
-
-  .bottom-viewport::-webkit-scrollbar {
-    display: none;
-  }
-
   .bottom-ion-header {
     background-color: #f4f6fe !important;
   }
-  .bottom-ion-list{
+
+  .bottom-ion-list {
     background-color: #f4f6fe !important;
 
   }
-  .bottom-labels-container {
+
+  .labels-container {
     display: flex;
     flex-direction: column;
-    padding-left: 40px;
-  }
-
-  .balance-change-label{
-    font-size: 24px;
-    font-weight: bold;
+    padding-left: 20px;
   }
 
 
-  .bottom-labels-card-number{
+  .labels-date {
+    font-size: 16px;
+    color: var(--ion-color-primary)
+  }
+
+  .labels-time {
     color: var(--ion-color-medium);
     font-size: 14px;
     font-weight: lighter;
@@ -172,10 +172,6 @@ ion-title {
 }
 
 
-cdk-virtual-scroll-viewport {
-  height: 100% !important;
-  width: 100% !important;
-}
 
 ion-button {
   --color: var(--ion-color-primary);
@@ -203,15 +199,15 @@ ion-note {
   font-size: 12px;
 }
 
-
-.my-custom-class{
-  ion-header {
-    background-color: red;
-  }
-  ion-content {
-    background-color: blue;
+.bottom-button-section{
+  display: flex; justify-content: center;
+  
+  .add-card-buttom{
+    width: 80%;
+    color: var(--ion-color-light);
   }
 }
+
 
 .loading-spinner {
   display: flex;
@@ -231,14 +227,3 @@ ion-note {
     font-size: 18px;
   }
 }
-
-.action-sheet-custom {
-  --ion-color-base: #ffffff;
-  --ion-background-color: #f4f4f4;
-  --ion-color-primary: #007bff;
-}
-
-.action-sheet-button-delete {
-  color: #007bff !important;
-}
-

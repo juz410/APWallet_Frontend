@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController, AlertButton, AlertController, ModalController } from '@ionic/angular';
+import { ActionSheetController, AlertButton, AlertController, ModalController, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { Observable } from 'rxjs';
 import { User, Card } from 'src/app/interfaces/user';
 import { WsApiService } from 'src/app/services/ws-api.service';
 import { ComponentService } from 'src/app/services/component.service';
+
 
 @Component({
   selector: 'app-card',
@@ -19,11 +20,15 @@ export class CardPage implements OnInit {
   constructor(
     private storage: Storage,
     private ws: WsApiService,
-    private modalCtrl: ModalController,
     private component: ComponentService,
-    private alertCtrl: AlertController,
-    private actionSheetCtrl: ActionSheetController
-  ) { }
+    private actionSheetCtrl: ActionSheetController,
+    private navCtrl: NavController,
+  ) {}
+
+  ionViewWillEnter(){
+    this.cards$ = this.ws.get<Card[]>(`/card/`)
+
+  }
 
   ngOnInit() {
     this.storage.get('user').then(
@@ -32,7 +37,6 @@ export class CardPage implements OnInit {
       }
     )
 
-    this.cards$ = this.ws.get<Card[]>(`/card/`)
   }
 
   async cardOptions(card) {
@@ -41,9 +45,7 @@ export class CardPage implements OnInit {
         {
           text: 'Delete',
           handler: () => {
-            // Call a function to delete the card
             this.deleteCard(card.card_id);
-
           }
         },
         {
@@ -54,10 +56,9 @@ export class CardPage implements OnInit {
     });
     (await actionSheet).present();
   }
-
-
-  addNewCard(){
-    this.component.alertMessage('Add New Card', 'This feature is not available yet', 'danger')
+  
+  addNewCard() {
+    this.navCtrl.navigateForward('/tabs/card/add-new-card');
   }
 
   deleteCard(card_id: number) {
@@ -68,6 +69,7 @@ export class CardPage implements OnInit {
         this.ws.delete(`/card/?card_id=${card_id}`).subscribe(
           () => {
             this.component.toastMessage('Card deleted', 'success')
+            this.cards$ = this.ws.get<Card[]>(`/card/`)
           }
         )
       }

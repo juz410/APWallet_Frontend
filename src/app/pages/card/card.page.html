@@ -33,29 +33,30 @@
     </ion-card-header>
     <ion-card-content class="bottom-ion-card-content">
       <cdk-virtual-scroll-viewport class="bottom-viewport" itemSize="56" minBufferPx="900" maxBufferPx="1350">
-        <ion-list *ngIf="cards$ | async as cards; else loadingCards" class="bottom-content-ion-list">
-          <ng-container *ngIf="cards.length !== 0 ; else noCards">
-            <div *cdkVirtualFor="let card of cards">
-              <ion-card class="bottom-contents">
+        <ion-list class="bottom-content-ion-list">
+          <ng-container *ngIf="(cards$ | async) as cards; else loadingCards">
+            <ng-container *ngIf="cards.length !== 0 ; else noCards">
+              <div *ngFor="let card of cards">
+                <ion-card class="bottom-contents">
 
-                <ion-item class="ion-no-padding" lines="none">
-                  <ion-icon name="card-outline" size="large"></ion-icon>
-                  <div class="bottom-labels-container">
-                    <label>
-                      Credit/debit card
-                    </label>
-                    <ion-label class="bottom-labels-card-number">
-                      ************{{card.card_number.slice(-4)}}
-                    </ion-label>
-                  </div>
-                  <ion-button (click)="cardOptions(card)" color="medium" fill="clear" slot="end">
-                    <ion-icon size="large" name="ellipsis-vertical-outline"></ion-icon>
-                  </ion-button>
-                </ion-item>
-              </ion-card>
-            </div>
+                  <ion-item class="ion-no-padding" lines="none">
+                    <ion-icon name="card-outline" size="large"></ion-icon>
+                    <div class="bottom-labels-container">
+                      <label>
+                        Credit/debit card
+                      </label>
+                      <ion-label class="bottom-labels-card-number">
+                        ************{{card.card_number.slice(-4)}}
+                      </ion-label>
+                    </div>
+                    <ion-button (click)="cardOptions(card)" color="medium" fill="clear" slot="end">
+                      <ion-icon size="large" name="ellipsis-vertical-outline"></ion-icon>
+                    </ion-button>
+                  </ion-item>
+                </ion-card>
+              </div>
+            </ng-container>
           </ng-container>
-
         </ion-list>
       </cdk-virtual-scroll-viewport>
 

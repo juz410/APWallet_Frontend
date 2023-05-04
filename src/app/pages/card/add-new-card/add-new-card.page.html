@@ -1,0 +1,64 @@
+<ion-content>
+  <div class="top-section">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/card">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-back-button>
+      <ion-title>Add New Card</ion-title>
+    </ion-buttons>
+    <ion-card class="top-section-card">
+      <ion-item class="ion-no-padding" lines="none">
+        <ion-icon name="card-outline" size="large"></ion-icon>
+        <div class="top-labels-container">
+          <ion-label>
+            Please fill in your card information!
+          </ion-label>
+        </div>
+      </ion-item>
+    </ion-card>
+    <!-- <div *ngIf="user; else loadingBalance" class="balance-section"> -->
+  </div>
+
+
+  <ion-card class="bottom-section">
+    <ion-card-content *ngIf="!isLoading; else loading">
+      <form [formGroup]="this.addNewCardForm">
+        <ion-item>
+          <ion-label position="stacked">Card Number*</ion-label>
+          <ion-input pattern="^[0-9]*$" maxlength="16" formControlName="cardNumber"></ion-input>
+        </ion-item>
+        <ion-row>
+          <ion-item>
+            <ion-label position="stacked">Card Expiry Month*</ion-label>
+            <ion-select formControlName="cardExpireMonth">
+              <ion-select-option *ngFor="let month of months" [value]="month.value">{{month.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Card Expiry Year*</ion-label>
+            <ion-select formControlName="cardExpireYear">
+              <ion-select-option *ngFor="let expireYear of expireYears"
+                [value]="expireYear">{{expireYear}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-row>
+        <ion-item>
+          <ion-label position="stacked">CVV*</ion-label>
+          <ion-input maxlength="3" formControlName="cardCvv"></ion-input>
+        </ion-item>
+      </form>
+      <div class="bottom-button-section">
+        <ion-button [disabled]="!canDone()" color='dark' class="add-card-buttom" (click)="addCard()">Add
+          Card</ion-button>
+      </div>
+
+    </ion-card-content>
+    <ng-template #loading>
+      <div class="loading-spinner">
+        <ion-spinner color="primary"></ion-spinner>
+        <p class="loading-text glob-text-bold">Adding New Card......</p>
+      </div>
+    </ng-template>
+  </ion-card>
+
+</ion-content>

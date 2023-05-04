@@ -48,7 +48,6 @@ export class CasService {
             : ( this.component.toastMessage(res,'danger'),EMPTY)),
         tap(tgt => {
           // Resolve both Promises
-          console.log(tgt)
           Promise.all([this.storage.set('tgt', tgt), this.storage.set('cred', data)]);
         })
       ))
@@ -57,7 +56,6 @@ export class CasService {
 
 
   getST(serviceUrl: string = this.casUrl, tgt?: string | {}): Observable<string> {
-    console.log(serviceUrl)
     const options = {
       headers: { 'Content-type': 'application/x-www-form-urlencoded' },
       params: { service: serviceUrl },
