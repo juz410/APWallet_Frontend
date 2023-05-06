@@ -87,53 +87,38 @@ export class CasService {
     );
   }
 
-  // validate(st?: string): Observable<Role> {
-  //   const options = {
-  //     headers: { 'Content-type': 'application/x-www-form-urlencoded' },
-  //     params: { format: 'json', service: this.casUrl, ticket: st },
-  //     withCredentials: true,
-  //   };
+  validate(st?: string): Observable<string> {
+    const options = {
+      headers: { 'Content-type': 'application/x-www-form-urlencoded' },
+      params: { format: 'json', service: this.casUrl, ticket: st },
+      withCredentials: true,
+    };
 
-  //   return this.http.get<any>(this.casUrl + '/cas/p3/serviceValidate', options).pipe(
-  //     switchMap(res => {
-  //       const parts = res.serviceResponse.authenticationSuccess.attributes.distinguishedName
-  //         .join().toLowerCase().split(',');
-  //       let role: Role = 0;
-  //       let canAccessResults = false;
-  //       let canAccessPayslipFileSearch = false;
+    return this.http.get<any>(this.casUrl + '/cas/p3/serviceValidate', options).pipe(
+      switchMap(res => {
+        const parts = res.serviceResponse.authenticationSuccess.attributes.distinguishedName
+          .join().toLowerCase().split(',');
+        
+        let role = null;
+        if (parts.indexOf('ou=students') !== -1) {
+          role = "student"
+        }
+        if (parts.indexOf('ou=academic') !== -1) {
+          role = "academic"
+        }
+        if (parts.indexOf('ou=apiit tpm') !== -1) {
+          role = "staff"
+        }
+        if (!role) {
+          this.storage.clear();
+          return throwError(() => new Error('Group not supported'));
+        }
 
-  //       if (parts.indexOf('ou=students') !== -1) {
-  //         role |= Role.Student;
-  //       }
-  //       if (parts.indexOf('ou=academic') !== -1) {
-  //         role |= Role.Lecturer;
-  //       }
-  //       if (parts.indexOf('ou=apiit tpm') !== -1) {
-  //         role |= Role.Admin;
-  //       }
-  //       if (!role) {
-  //         this.storage.clear();
-  //         return throwError(() => new Error('Group not supported'));
-  //       }
+        return forkJoin([
+          from(this.storage.set('role', role)),
+        ]).pipe(mergeMap(() => of(role)));
 
-  //       if (res.serviceResponse.authenticationSuccess.attributes.memberOf) { // some users do not have memberOf attribute
-  //         const memberOf = res.serviceResponse.authenticationSuccess.attributes.memberOf
-  //           .join().toLowerCase().split(',');
-
-  //         // const distinguishedName = res.serviceResponse.authenticationSuccess.attributes.distinguishedName
-  //         //   .join().toLowerCase().split(',');
-
-  //         canAccessResults = memberOf.includes('cn=gims_web_result'.toLowerCase());
-  //         canAccessPayslipFileSearch = memberOf.includes('cn=ACL_EPAYSLIP_ADMIN'.toLowerCase());
-  //       }
-
-  //       // make sure storage tasks are done before returning
-  //       return forkJoin([
-  //         from(this.storage.set('role', role)),
-  //         from(this.storage.set('canAccessResults', canAccessResults)),
-  //         from(this.storage.set('canAccessPayslipFileSearch', canAccessPayslipFileSearch))
-  //       ]).pipe(mergeMap(() => of(role)));
-  //     }),
-  //   );
-  // }
+      }),
+    );
+  }
 }

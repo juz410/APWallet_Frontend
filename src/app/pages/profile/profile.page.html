@@ -1,13 +1,77 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="top-section">
+    <!-- <div *ngIf="user; else loadingBalance" class="balance-section"> -->
+    <div class="top-section-content">
+      <div class="top-section-content-label ">
+        Profile
+      </div>
+    </div>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <ion-card class="bottom-section">
+    <ng-container *ngIf="this.user">
+      <ion-card class="bottom-contents">
+        <ion-item class="ion-no-padding" lines="none">
+          <ion-avatar tappable="true" class="ion-margin avatar">
+            <!-- Student Profile Picture -->
+
+            <ng-container *ngIf="this.user.role === 'student'; else staffImage">
+              <ion-img #image [src]="photo$ | async" (ionError)="image.src = 'assets/img/no_avatar.png'"></ion-img>
+            </ng-container>
+            <!-- Staff Profile Picture -->
+            <ng-template #staffImage>
+              <ng-container *ngIf="staffProfile$ | async as staffProfile; else noPicture">
+                <ion-img #image [src]="staffProfile[0].PHOTO" (ionError)="image.src = 'assets/img/no_avatar.png'">
+                </ion-img>
+              </ng-container>
+            </ng-template>
+
+            <!-- When user enables "Hide Profile Picture" in settings -->
+            <ng-template #noPicture>
+              <img src="assets/img/no_avatar.png" alt="Profile" />
+            </ng-template>
+          </ion-avatar>
+          <div class="bottom-labels-container">
+            <label class="bottom-labels-name">
+              {{this.user.name}}
+            </label>
+            <ion-label class="bottom-labels-email">
+              {{this.user.email}}
+            </ion-label>
+          </div>
+        </ion-item>
+      </ion-card>
+
+      <div class="user-details">
+        <ion-label class="user-details-label">
+          Phone Number
+        </ion-label>
+        <ion-label class="user-details-content-label">
+          {{this.user.phone_number}}
+        </ion-label>
+        <ion-label class="user-details-label">
+          User Since
+        </ion-label>
+        <ion-label class="user-details-content-label">
+          {{this.user.registered_at | date: 'mediumDate'}}
+        </ion-label>
+      </div>
+      <!-- <hr style="height:2px;border-width:0;color:gray;background-color:gray"> -->
+
+    </ng-container>
+    <div class="separator"></div>
+    <div class="settings-section">
+      <ion-label class="settings-label">Settings</ion-label>
+      <ion-button (click)="resetPIN()" class="settings-button" color="primary">
+        <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+        Reset PIN Number
+      </ion-button>
+      <ion-button (click)="logoutConfirm()" class="settings-button" color="danger">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        Logout
+      </ion-button>
+    </div>
+
+  </ion-card>
 </ion-content>
