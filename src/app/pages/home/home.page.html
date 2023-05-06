@@ -5,7 +5,7 @@
         Total Balance:
       </div>
       <div class="balance-amount">
-        
+
         {{ user.balance | currency:'MYR':'symbol':'1.2-2' }}
       </div>
     </div>
@@ -33,7 +33,7 @@
         <ion-text class="button-text">Transfer</ion-text>
       </div>
       <div>
-        <ion-fab-button (click)="qrPage()"color="main-page-button" size="small">
+        <ion-fab-button (click)="qrPage()" color="main-page-button" size="small">
           <ion-icon name="qr-code-outline"></ion-icon>
         </ion-fab-button>
         <ion-text class="button-text">QR Code</ion-text>
@@ -54,6 +54,9 @@
     <ion-card-content>
       <ion-list *ngIf="user; else loadingTransactions" class="transaction-ion-list">
         <ng-container *ngIf="transactions$ | async as transactions  ; else loadingTransactions">
+          <ng-container *ngIf="transactions.length !== 0; else noTransactions">
+
+          
           <ion-card *ngFor="let transaction of transactions.slice(0,3)" class="transactions">
             <ion-item class="ion-no-padding" lines="none">
               <ng-container *ngIf="transaction.receiver_id===user.user_id">
@@ -99,11 +102,15 @@
                   - {{transaction.amount}}
                 </ion-label>
               </ng-container>
-
-
-
             </ion-item>
           </ion-card>
+        </ng-container>
+        <ng-template #noTransactions>
+          <div class="no-transaction-section">
+            <ion-label class="no-transaction-section-title">No Transactions Found</ion-label>
+            <ion-img class="image" src='assets/img/no_transaction_history.png'></ion-img>
+          </div>
+        </ng-template>
         </ng-container>
       </ion-list>
       <ng-template #loadingTransactions>

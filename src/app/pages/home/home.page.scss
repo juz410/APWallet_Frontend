@@ -60,15 +60,6 @@ ion-title {
     justify-content: center;
     color: var(--ion-color-light);
   }
-
-  .button-transparent {
-    // background: transparent;
-    opacity: 0.5;
-  }
-
-  .button-transparent ion-icon {
-    opacity: 100 !important;
-  }
 }
 
 
@@ -138,6 +129,26 @@ ion-title {
     font-weight: lighter;
 
   }
+}
+
+.no-transaction-section{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .no-transaction-section-title{
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--ion-color-dark);
+    margin-bottom: 16px;
+  }
+}
+
+.image {
+  width: 300px;
+  height: 300px;
+  align-items: center;
 }
 
 

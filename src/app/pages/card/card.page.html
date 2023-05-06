@@ -61,7 +61,11 @@
       </cdk-virtual-scroll-viewport>
 
       <ng-template #noCards>
-        <ion-label>NO CARDS</ion-label>
+        <div class="no-card-section">
+          <ion-label class="no-card-section-title">No Cards Found</ion-label>
+          <ion-label class="no-card-section-body"> Start adding a card now!</ion-label>
+          <ion-img class="image" src='assets/img/no_card.png'></ion-img>
+        </div>
       </ng-template>
 
       <ng-template #loadingCards>

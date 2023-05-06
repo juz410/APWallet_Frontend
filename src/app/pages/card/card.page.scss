@@ -62,25 +62,6 @@ ion-title {
     justify-content: center;
     color: black;
   }
-
-  .button-transparent {
-    // background: transparent;
-    opacity: 0.5;
-  }
-
-  .button-transparent ion-icon {
-    opacity: 100 !important;
-  }
-}
-
-
-.ion-color-main-page-button {
-  --ion-color-base: var(--ion-color-main-page-button);
-  --ion-color-base-rgb: var(--ion-color-main-page-button-rgb);
-  --ion-color-contrast: var(--ion-color-main-page-button-contrast);
-  --ion-color-contrast-rgb: var(--ion-color-main-page-button-contrast-rgb);
-  --ion-color-shade: var(--ion-color-main-page-button-shade);
-  --ion-color-tint: var(--ion-color-main-page-button-tint);
 }
 
 .bottom-section {
@@ -95,26 +76,11 @@ ion-title {
 
   .bottom-contents {
     border-radius: 1.5rem;
-    // padding-bottom: 0.75rem;
-    // padding-top: 0.75rem;
     margin-left: 1.5rem;
     margin-right: 1.5rem;
 
   }
 
-  .bottom-content-header {
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 24px;
-    padding: 8px;
-  }
-
-  .bottom-content-ion-header {
-    background-color: #f4f6fe !important;
-  }
   .bottom-content-ion-list{
     background-color: #f4f6fe !important;
 
@@ -147,10 +113,7 @@ ion-title {
   .bottom-ion-header {
     background-color: #f4f6fe !important;
   }
-  .bottom-ion-list{
-    background-color: #f4f6fe !important;
 
-  }
   .bottom-labels-container {
     display: flex;
     flex-direction: column;
@@ -170,6 +133,32 @@ ion-title {
 
   }
 }
+
+.no-card-section{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .no-card-section-title{
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--ion-color-dark);
+  }
+
+  .no-card-section-body{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+}
+
+.image {
+  width: 300px;
+  height: 300px;
+  align-items: center;
+}
+
 
 
 cdk-virtual-scroll-viewport {
@@ -204,15 +193,6 @@ ion-note {
 }
 
 
-.my-custom-class{
-  ion-header {
-    background-color: red;
-  }
-  ion-content {
-    background-color: blue;
-  }
-}
-
 .loading-spinner {
   display: flex;
   flex-direction: column;
@@ -231,14 +211,3 @@ ion-note {
     font-size: 18px;
   }
 }
-
-.action-sheet-custom {
-  --ion-color-base: #ffffff;
-  --ion-background-color: #f4f4f4;
-  --ion-color-primary: #007bff;
-}
-
-.action-sheet-button-delete {
-  color: #007bff !important;
-}
-
