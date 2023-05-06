@@ -23,6 +23,7 @@ export class HomePage implements OnInit {
   ) { }
 
   ionViewWillEnter(){
+    this.user = null;
     this.user$ = this.ws.get<User>(`/user/`)
     this.user$.subscribe(
       user => {

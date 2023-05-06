@@ -27,6 +27,7 @@ export class TransactionsHistoryPage implements OnInit {
   ) { }
 
   ionViewWillEnter(){
+    this.isLast = false;
     this.storage.get('user').then(
       user => {
         this.user = user
