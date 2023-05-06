@@ -6,6 +6,9 @@ import { ModalController } from '@ionic/angular';
 import { RegistrationPage } from '../registration/registration.page';
 import { ComponentService } from 'src/app/services/component.service';
 import { Storage } from '@ionic/storage-angular';
+import { FormGroup, FormBuilder,Validator, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +17,7 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class LoginPage implements OnInit {
 
-  username: string;
-  password: string;
+  loginForm:FormGroup;
   url: string;
   constructor(
     private router: Router,
@@ -24,18 +26,35 @@ export class LoginPage implements OnInit {
     private ws: WsApiService,
     private modalCtrl: ModalController,
     private component: ComponentService,
-    private storage: Storage
+    private storage: Storage,
+    private fb:FormBuilder,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
+        this.storage.get('publicKey').then(
+      resp => {
+        if(!resp){
+          this.http.get<any>(`${environment.url}/key/public-key`).subscribe(
+            resp => {
+              this.storage.set('publicKey', resp.public_key);
+            }
+          )
+        }
+      }
+    )
     this.url = this.route.snapshot.queryParams['redirect'] || '/';
+    this.loginForm = this.fb.group({
+      username:['',[Validators.required]],
+      password:['',[Validators.required]]
+    });
   }
 
   login() {
-    console.log(this.username, this.password)
 
-    // this.router.navigateByUrl(url, {replaceUrl: true});
-    this.cas.getTGT(this.username, this.password).subscribe(resp => {
+    const username = this.loginForm.value.username;
+    const password = this.loginForm.value.password;
+    this.cas.getTGT(username, password).subscribe(resp => {
 
       this.ws.get<any>('/user/').subscribe(
         resp => {
@@ -72,6 +91,10 @@ export class LoginPage implements OnInit {
       this.storage.remove('tgt')
       this.storage.remove('cred')
     }
+  }
+
+  canDone(){
+    return this.loginForm.valid;
   }
 
 }

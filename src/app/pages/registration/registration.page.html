@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>
       register
@@ -8,7 +8,6 @@
 
 <ion-content class="ion-padding">
   <ion-card *ngIf="!isLoading; else loading">
-    <!-- make a phone number input and use the pin number input i written below -->
     <form [formGroup]="this.registerForm">
       <ion-item>
         <ion-label position="stacked">Phone Number</ion-label>
@@ -42,4 +41,53 @@
       <p class="loading-text glob-text-bold">Registering New User......</p>
     </div>
   </ng-template>
+</ion-content> -->
+
+<ion-content>
+  <div class="top-section">
+    <div  class="top-section-content">
+
+      <ion-label class="top-section-content-label-header">
+        REGISTRATION
+      </ion-label>
+
+      <ion-label text-wrap class="top-section-content-label">
+        Please setup your account to start using APWallet.
+      </ion-label>
+       
+      </div>
+    </div>
+
+
+  <ion-card class="bottom-section">
+    <ion-card-content class="bottom-ion-card-content">
+      <form [formGroup]="this.registerForm">
+        <ion-item>
+          <ion-label position="stacked">Phone Number</ion-label>
+          <ion-input placeholder="Phone Number" type="text" name="username" formControlName="phoneNumber"
+            required></ion-input>
+          <ion-note color="danger" *ngIf="this.registerForm.get('phoneNumber').hasError('required')">Phone Number is
+            required</ion-note>
+          <ion-note color="danger" *ngIf="!this.registerForm.get('phoneNumber').hasError('required') && 
+            this.registerForm.get('phoneNumber').hasError('pattern')">Invalid Phone Number</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">PIN Number</ion-label>
+          <code-input [isCodeHidden]="true" [codeLength]="6" (codeChanged)="onCodeChanged($event)">
+          </code-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Confirm PIN Number</ion-label>
+          <code-input [isCodeHidden]="true" [codeLength]="6" (codeChanged)="onCodeChangedConfirmPin($event)">
+          </code-input>
+        </ion-item>
+      </form>
+      <div class="bottom-button-section">
+        <ion-button [disabled]="!this.registerForm.valid || this.pinNumber.length !== 6 || this.confirmPinNumber.length !== 6" color='primary' class="register-button" (click)="submit()">
+          CONFIRM REGISTRATION
+        </ion-button>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
 </ion-content>

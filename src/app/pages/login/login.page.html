@@ -1,27 +1,36 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Login
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="top-section">
+    <div  class="top-section-content">
 
-<ion-content class="ion-padding">
-  <ion-card>
-    <form (ngSubmit)="login()" #loginForm="ngForm">
-      <ion-item>
-        <ion-label position="stacked">APKey</ion-label>
-        <ion-input placeholder="APKEY" type="text" name="username" [(ngModel)]="username" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Password</ion-label>
-        <ion-input placeholder="********" type="password" name="password" [(ngModel)]="password" required></ion-input>
-      </ion-item>
-      <div class="ion-padding">
-        <ion-button type="submit" expand="block" [disabled]="!loginForm.valid">Login</ion-button>
+      <ion-label class="top-section-content-label-header">
+        Welcome to APWallet
+      </ion-label>
+
+      <ion-label text-wrap class="top-section-content-label">
+        Transfer Money Easily With Us.
+      </ion-label>
+       
       </div>
-    </form>
+    </div>
+
+
+  <ion-card class="bottom-section">
+    <ion-card-content class="bottom-ion-card-content">
+      <form [formGroup]="this.loginForm">
+        <ion-item>
+          <ion-label position="stacked">Username</ion-label>
+          <ion-input formControlName="username"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Password</ion-label>
+          <ion-input type="password"  formControlName="password"></ion-input>
+        </ion-item>
+      </form>
+      <div class="bottom-button-section">
+        <ion-button [disabled]="!canDone()" color='primary' class="login-button" (click)="login()">
+          LOGIN
+        </ion-button>
+      </div>
+    </ion-card-content>
   </ion-card>
-  
-  
 </ion-content>

@@ -24,11 +24,7 @@ export class CasService {
   ) { }
 
   async isAuthenticated(): Promise<boolean> {
-    return this.storage.get('tgt').then(tgt => !!tgt);
-  }
-
-  async isUser(): Promise<boolean> {
-    return this.storage.get('user').then(user => !!user);
+    return this.storage.get('tgt').then(tgt => !!tgt) && this.storage.get('user').then(user => !!user);
   }
   
   getTGT(username?: string, password?: string): Observable<string> {

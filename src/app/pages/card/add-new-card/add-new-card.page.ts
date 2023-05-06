@@ -90,8 +90,8 @@ export class AddNewCardPage implements OnInit {
   }
 
   canDone(){
-    return true
-    // return this.addNewCardForm.valid
+    // return true
+    return this.addNewCardForm.valid
   }
 
 }

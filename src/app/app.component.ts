@@ -14,16 +14,5 @@ export class AppComponent {
     private http: HttpClient
   ) {
     this.storage.create();
-    this.storage.get('publicKey').then(
-      resp => {
-        if(!resp){
-          this.http.get<any>(`${environment.url}/key/public-key`).subscribe(
-            resp => {
-              this.storage.set('publicKey', resp.public_key);
-            }
-          )
-        }
-      }
-    )
   }
 }
