@@ -1,5 +1,10 @@
 <ion-content>
   <div class="top-section">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-back-button>
+    </ion-buttons>
     <div *ngIf="user; else loadingBalance" class="balance-section">
 
       <div class="balance-label">
@@ -22,7 +27,7 @@
   <ion-card class="transaction-section">
     <ion-card-header class="transaction-ion-header">
       <div class="transaction-header">
-        Recent Transactions
+        Transactions History
       </div>
     </ion-card-header>
     <ion-card-content>

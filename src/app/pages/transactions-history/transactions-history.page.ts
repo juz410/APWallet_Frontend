@@ -26,15 +26,16 @@ export class TransactionsHistoryPage implements OnInit {
 
   ) { }
 
-  ngOnInit() {
-    console.log(this.currentPage)
+  ionViewWillEnter(){
     this.storage.get('user').then(
       user => {
         this.user = user
       }
     )
-
     this.loadTransactions();
+  }
+
+  ngOnInit() {
   }
 
   private async loadTransactions() {

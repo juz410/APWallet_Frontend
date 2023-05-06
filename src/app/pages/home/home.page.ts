@@ -22,7 +22,7 @@ export class HomePage implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
+  ionViewWillEnter(){
     this.user$ = this.ws.get<User>(`/user/`)
     this.user$.subscribe(
       user => {
@@ -30,7 +30,10 @@ export class HomePage implements OnInit {
       }
     )
     this.transactions$ = this.ws.get<any>(`/transaction/user`)
+  }
 
+  ngOnInit() {
+    
   }
 
   topupPage(){
