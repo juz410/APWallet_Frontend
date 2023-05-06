@@ -34,11 +34,15 @@ export class HomePage implements OnInit {
   }
 
   topupPage(){
-    this.router.navigateByUrl('/top-up')
+    this.router.navigateByUrl('/tabs/top-up')
   }
 
   transferPage(){
-    this.router.navigateByUrl('/instant-transfer')
+    this.router.navigateByUrl('/tabs/instant-transfer')
+  }
+
+  transactionHistory(){
+    this.router.navigateByUrl('/tabs/transactions-history')
   }
 
   qrPage(){

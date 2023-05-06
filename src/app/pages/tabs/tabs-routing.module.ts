@@ -40,6 +40,16 @@ const routes: Routes = [
         loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
       },
       {
+        path: 'transactions-history',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('../transactions-history/transactions-history.module').then(m => m.TransactionsHistoryPageModule)
+      },
+      {
+        path: 'top-up',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('../top-up/top-up.module').then(m => m.TopUpPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'

@@ -20,36 +20,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule)
   },
-  {
-    path: 'home',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: 'card',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./pages/card/card.module').then( m => m.CardPageModule)
-  },
-  {
-    path: 'top-up',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./pages/top-up/top-up.module').then( m => m.TopUpPageModule)
-  },
-  {
-    path: 'transactions-history',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./pages/transactions-history/transactions-history.module').then( m => m.TransactionsHistoryPageModule)
-  },
-  {
-    path: 'instant-transfer',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./pages/instant-transfer/instant-transfer.module').then( m => m.InstantTransferPageModule)
-  },
-  {
-    path: 'profile',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
-  }
 ];
 @NgModule({
   imports: [
