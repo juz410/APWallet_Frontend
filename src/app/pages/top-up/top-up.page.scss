@@ -1,0 +1,264 @@
+ion-content {
+  --background: var(--ion-color-primary);
+  border-radius: 3rem;
+}
+
+
+.top-section {
+  height: 25%;
+
+}
+
+
+ion-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+
+  position: absolute;
+  width: 223px;
+  height: 60px;
+  left: 43px;
+  top: 62px;
+
+  background-color: var(--ion-color-primary);
+  color: var(--ion-color-light);
+}
+
+ion-title {
+  font-size: 24px;
+}
+
+.balance-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  color: var(--ion-color-light);
+}
+
+.balance-label {
+  font-size: 24px;
+}
+
+.balance-amount {
+  font-size: 48px;
+}
+
+.button-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  align-items: center;  
+  margin-top: 16px;
+  height: 4.5rem;
+  border-radius: 1.5rem;
+  background-color: #CDD4FE !important ;
+
+
+  .button-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+  }
+
+}
+
+.bottom-section {
+  border-radius: 24px 24px 0px 0px;
+  margin: 0px;
+  background-color: #f4f6fe !important;
+  height: calc(100% - 25%);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+
+  .bottom-contents {
+    border-radius: 1.5rem;
+    // padding-bottom: 0.75rem;
+    // padding-top: 0.75rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+
+  }
+
+  .bottom-ion-card-content{
+    height: 100%;
+  }
+
+  .bottom-content-header {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    padding: 8px;
+  }
+
+  .bottom-content-ion-header {
+    background-color: #f4f6fe !important;
+  }
+  .bottom-content-ion-list{
+    background-color: #f4f6fe !important;
+
+  }
+
+  .bottom-header {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    padding: 8px;
+  }
+
+  .bottom-ion-header {
+    background-color: #f4f6fe !important;
+  }
+  .bottom-ion-list{
+    background-color: #f4f6fe !important;
+
+  }
+  .labels-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+  }
+
+  .balance-change-label{
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .labels-date{
+    font-size: 16px;
+    color: var(--ion-color-primary)
+  }
+
+  .labels-time{
+    color: var(--ion-color-medium);
+    font-size: 14px;
+    font-weight: lighter;
+
+  }
+
+  .bottom-viewport {
+    height: 100%;
+    width: 100%;
+    
+  }
+  .bottom-labels-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+  }
+
+  .bottom-labels-card-number{
+    color: var(--ion-color-medium);
+    font-size: 14px;
+    font-weight: lighter;
+
+  }
+}
+
+.image {
+  width: 300px;
+  height: 300px;
+  align-items: center;
+}
+
+.no-card-section{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .no-card-section-title{
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--ion-color-dark);
+  }
+
+
+}
+.no-card-section-button{
+  --border-radius: 20px;
+}
+
+.bank_logo{
+  width: 50px;
+  height: 50px;
+}
+
+ion-segment-button {
+  color: #999;
+  --indicator-color: transparent !important;
+  --indicator-color-checked: transparent !important;
+}
+
+ion-segment-button.segment-button-checked {
+  color: white;
+  background-color: #091D88;
+}
+
+.segment-button {
+  width: 150px;
+}
+
+
+
+
+
+ion-button {
+  --color: var(--ion-color-primary);
+}
+
+.ion-fab-button {
+  --color: var(--ion-color-primary);
+}
+
+ion-card-content {
+  padding: 0px;
+}
+
+ion-item {
+  padding: 16px;
+  // border-bottom: 1px solid var(--ion-color-medium);
+  border-style: none;
+}
+
+ion-item:last-of-type {
+  border-bottom: none;
+}
+
+ion-note {
+  font-size: 12px;
+}
+
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .loading-text {
+    margin-top: 20px;
+    text-align: center;
+    width: 250px;
+    color: var(--ion-color-primary);
+    font-size: 18px;
+  }
+}
+

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TopUpPageRoutingModule } from './top-up-routing.module';
 
 import { TopUpPage } from './top-up.page';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TopUpPageRoutingModule
+    TopUpPageRoutingModule,
+    ScrollingModule
   ],
   declarations: [TopUpPage]
 })
