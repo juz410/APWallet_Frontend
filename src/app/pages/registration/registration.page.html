@@ -1,47 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      register
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content class="ion-padding">
-  <ion-card *ngIf="!isLoading; else loading">
-    <form [formGroup]="this.registerForm">
-      <ion-item>
-        <ion-label position="stacked">Phone Number</ion-label>
-        <ion-input placeholder="Phone Number" type="text" name="username" formControlName="phoneNumber"
-          required></ion-input>
-        <ion-note color="danger" *ngIf="this.registerForm.get('phoneNumber').hasError('required')">Phone Number is
-          required</ion-note>
-        <ion-note color="danger" *ngIf="!this.registerForm.get('phoneNumber').hasError('required') && 
-          this.registerForm.get('phoneNumber').hasError('pattern')">Invalid Phone Number</ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">PIN Number</ion-label>
-        <code-input [isCodeHidden]="true" [codeLength]="6" (codeChanged)="onCodeChanged($event)">
-        </code-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Confirm PIN Number</ion-label>
-        <code-input [isCodeHidden]="true" [codeLength]="6" (codeChanged)="onCodeChangedConfirmPin($event)">
-        </code-input>
-      </ion-item>
-      <div class="ion-padding">
-        <ion-button type="submit" expand="block"
-          [disabled]="!this.registerForm.valid || this.pinNumber.length !== 6 || this.confirmPinNumber.length !== 6"
-          (click)="submit()">CONFIRM REGISTRATION</ion-button>
-      </div>
-    </form>
-  </ion-card>
-  <ng-template #loading>
-    <div class="loading-spinner">
-      <ion-spinner color="primary"></ion-spinner>
-      <p class="loading-text glob-text-bold">Registering New User......</p>
-    </div>
-  </ng-template>
-</ion-content> -->
 
 <ion-content>
   <div class="top-section">
@@ -60,7 +16,7 @@
 
 
   <ion-card class="bottom-section">
-    <ion-card-content class="bottom-ion-card-content">
+    <ion-card-content *ngIf="!isLoading; else loading"  class="bottom-ion-card-content">
       <form [formGroup]="this.registerForm">
         <ion-item>
           <ion-label position="stacked">Phone Number</ion-label>
@@ -89,5 +45,12 @@
       </div>
 
     </ion-card-content>
+    <ng-template #loading>
+      <div class="loading-spinner">
+        <ion-spinner color="primary"></ion-spinner>
+        <p class="loading-text glob-text-bold">Registering New User......</p>
+      </div>
+    </ng-template>
   </ion-card>
+  
 </ion-content>
