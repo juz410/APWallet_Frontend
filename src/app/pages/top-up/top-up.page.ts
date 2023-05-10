@@ -34,16 +34,17 @@ export class TopUpPage implements OnInit {
 
   ionViewWillEnter(){
     this.cards$ = this.ws.get<Card[]>(`/card/`)
-
-  }
-
-  ngOnInit() {
-
     this.storage.get('user').then(
       user => {
         this.user = user
       }
     )
+
+  }
+
+  ngOnInit() {
+
+
   }
 
   onSegmentChanged(event) {

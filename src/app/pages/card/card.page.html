@@ -7,7 +7,7 @@
       </div>
       <div class="balance-amount">
 
-        {{ user.balance | currency:'MYR':'symbol':'1.2-2' }}
+        {{ user.balance | currency:'MYR ':'symbol':'1.2-2' }}
       </div>
     </div>
     <ng-template #loadingBalance>
@@ -25,7 +25,7 @@
         Available Cards
       </div>
       <div class="button-section">
-        <ion-fab-button (click)="addNewCard()" fill="clear" size="small">
+        <ion-fab-button class="add-new-card-button" (click)="addNewCard()" fill="clear" size="small">
           <ion-icon name="add-outline"></ion-icon>
         </ion-fab-button>
         <ion-text class="button-text">Add New Card</ion-text>

@@ -1,13 +1,76 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>instant-transfer</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="top-section">
+    <div *ngIf="user; else loadingBalance" class="balance-section">
+      <div class="balance-label">
+        Total Balance:
+      </div>
+      <div class="balance-amount">
+        {{ user.balance | currency:'MYR ':'symbol':'1.2-2' }}
+      </div>
+    </div>
+    <ng-template #loadingBalance>
+      <div class="loading-spinner">
+        <ion-spinner color="primary"></ion-spinner>
+        <p class="loading-text glob-text-bold">Loading balance......</p>
+      </div>
+    </ng-template>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">instant-transfer</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <ion-card class="bottom-section">
+    <ion-card-header class="bottom-ion-header">
+      <div class="bottom-header">
+        Transfer To
+      </div>
+
+    </ion-card-header>
+    <ion-item>
+      <ion-label position="stacked">Receiver Username</ion-label>
+      <ion-input [(ngModel)]="receiverID"></ion-input>
+    </ion-item>
+    <ion-item>
+
+      <ion-label position="stacked">Amount</ion-label>
+
+      <ion-input [(ngModel)]="this.amount" inputmode="numeric" type="number">
+        <span style="margin-right:10px">
+          RM
+        </span>
+      </ion-input>
+    </ion-item>
+
+    <ion-button [disabled]="!this.amount" (click)="transferCheck()" class="transfer-button" color="primary">
+      <ion-icon slot="start" name="paper-plane-outline"></ion-icon>
+      Transfer
+    </ion-button>
+
+
+
+    <ion-label class="recent-label">Recents</ion-label>
+    <cdk-virtual-scroll-viewport class="bottom-viewport" itemSize="56" minBufferPx="900" maxBufferPx="1350">
+      <ion-list class="bottom-content-ion-list">
+        <div *ngFor="let user of this.recentUsers">
+          <ion-card class="bottom-contents">
+
+            <ion-item class="ion-no-padding" lines="none">
+              <ion-icon size="large" name="person-circle-outline"></ion-icon>
+              <div class="bottom-labels-container">
+                <label>
+                  {{user.name}}
+                </label>
+                <ion-label class="bottom-labels-card-number">
+                  {{user.user_id}}
+                </ion-label>
+              </div>
+              <ion-button (click)="quickTransfer(user.user_id)" [disabled]="!this.amount" color="medium" fill="clear" slot="end">
+                <ion-icon size="large" name="chevron-forward-outline"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-card>
+        </div>
+
+      </ion-list>
+    </cdk-virtual-scroll-viewport>
+
+  </ion-card>
 </ion-content>

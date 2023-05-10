@@ -51,9 +51,14 @@ ion-title {
 .button-section {
   display: flex;
   flex-direction: column;
-  justify-content: center;  
-  align-items: center;  
+  justify-content: center;
+  align-items: center;
   margin-top: 16px;
+
+
+  .add-new-card-button {
+    --box-shadow: none;
+  }
 
 
   .button-text {
@@ -81,7 +86,7 @@ ion-title {
 
   }
 
-  .bottom-content-ion-list{
+  .bottom-content-ion-list {
     background-color: #f4f6fe !important;
 
   }
@@ -96,14 +101,14 @@ ion-title {
     padding: 8px;
   }
 
-  .bottom-ion-card-content{
+  .bottom-ion-card-content {
     height: 100%;
   }
 
   .bottom-viewport {
     height: 100%;
     width: 100%;
-    
+
   }
 
   .bottom-viewport::-webkit-scrollbar {
@@ -120,13 +125,13 @@ ion-title {
     padding-left: 40px;
   }
 
-  .balance-change-label{
+  .balance-change-label {
     font-size: 24px;
     font-weight: bold;
   }
 
 
-  .bottom-labels-card-number{
+  .bottom-labels-card-number {
     color: var(--ion-color-medium);
     font-size: 14px;
     font-weight: lighter;
@@ -134,19 +139,19 @@ ion-title {
   }
 }
 
-.no-card-section{
+.no-card-section {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 
-  .no-card-section-title{
+  .no-card-section-title {
     font-size: 24px;
     font-weight: bold;
     color: var(--ion-color-dark);
   }
 
-  .no-card-section-body{
+  .no-card-section-body {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 16px;

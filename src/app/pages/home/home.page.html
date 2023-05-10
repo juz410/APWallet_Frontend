@@ -6,7 +6,7 @@
       </div>
       <div class="balance-amount">
 
-        {{ user.balance | currency:'MYR':'symbol':'1.2-2' }}
+        {{ user.balance | currency:'MYR ':'symbol':'1.2-2' }}
       </div>
     </div>
     <ng-template #loadingBalance>
@@ -18,7 +18,7 @@
 
     <div class="button-section">
       <div>
-        <ion-fab-button (click)="topupPage()" color="main-page-button" size="small">
+        <ion-fab-button class="home-page-button" (click)="topupPage()" color="main-page-button" size="small">
           <ion-icon name="add-outline"></ion-icon>
         </ion-fab-button>
         <ion-text class="button-text">Topup</ion-text>
@@ -27,13 +27,13 @@
 
 
       <div>
-        <ion-fab-button (click)="transferPage()" color="main-page-button" size="small">
+        <ion-fab-button class="home-page-button" (click)="transferPage()" color="main-page-button" size="small">
           <ion-icon name="arrow-forward-outline"></ion-icon>
         </ion-fab-button>
         <ion-text class="button-text">Transfer</ion-text>
       </div>
       <div>
-        <ion-fab-button (click)="qrPage()" color="main-page-button" size="small">
+        <ion-fab-button class="home-page-button" (click)="qrPage()" color="main-page-button" size="small">
           <ion-icon name="qr-code-outline"></ion-icon>
         </ion-fab-button>
         <ion-text class="button-text">QR Code</ion-text>
@@ -68,8 +68,8 @@
                   <ion-label *ngIf="transaction.transaction_method === 'card_topup'">
                     Top up by card {{ transaction.last_4_card_digits}}
                   </ion-label>
-                  <ion-label *ngIf="transaction.transaction_method === 'instant_transfer'">
-                    Received from {{ transaction.sender_id}}
+                  <ion-label text-wrap *ngIf="transaction.transaction_method === 'instant_transfer'">
+                    Received from {{ transaction.sender.name}}
                   </ion-label>
                   <ion-label class="labels-date">
                     {{ transaction.registered_at | date:'mediumDate'}}
@@ -80,15 +80,15 @@
                   </ion-label>
                 </div>
 
-                <ion-label class="balance-change-label" slot="end">
+                <ion-label color="success" class="balance-change-label" slot="end">
                   + {{transaction.amount}}
                 </ion-label>
               </ng-container>
               <ng-container *ngIf="transaction.sender_id===user.user_id">
                 <ion-icon color="danger" name="arrow-up-outline"></ion-icon>
                 <div class="labels-container">
-                  <ion-label *ngIf="transaction.transaction_method === 'instant_transfer'">
-                    Transfer to {{ transaction.receiver_id}}
+                  <ion-label text-wrap *ngIf="transaction.transaction_method === 'instant_transfer'">
+                    Transfer to {{ transaction.receiver.name}}
                   </ion-label>
                   <ion-label>
                     {{ transaction.registered_at | date:'mediumDate'}}
@@ -98,7 +98,7 @@
                   </ion-label>
                 </div>
 
-                <ion-label class="balance-change-label" slot="end">
+                <ion-label color="danger" class="balance-change-label" slot="end">
                   - {{transaction.amount}}
                 </ion-label>
               </ng-container>

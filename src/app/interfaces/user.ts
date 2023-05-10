@@ -8,6 +8,11 @@ export interface User{
   role: string
 }
 
+export interface RecentUser{
+  user_id: string
+  name: string
+}
+
 export interface Card{
   card_id: number,
   card_number: string,

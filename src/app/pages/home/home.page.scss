@@ -54,6 +54,8 @@ ion-title {
   justify-content: space-around;
   margin-top: 16px;
 
+
+
   .button-text {
     display: flex;
     align-items: center;
@@ -70,6 +72,10 @@ ion-title {
   --ion-color-contrast-rgb: var(--ion-color-main-page-button-contrast-rgb);
   --ion-color-shade: var(--ion-color-main-page-button-shade);
   --ion-color-tint: var(--ion-color-main-page-button-tint);
+}
+
+.home-page-button{
+  --box-shadow:none;
 }
 
 .transaction-section {

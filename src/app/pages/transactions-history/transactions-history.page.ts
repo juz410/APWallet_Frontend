@@ -33,6 +33,7 @@ export class TransactionsHistoryPage implements OnInit {
         this.user = user
       }
     )
+    this.transactions = [];
     this.loadTransactions();
   }
 
@@ -52,6 +53,7 @@ export class TransactionsHistoryPage implements OnInit {
         this.isLast = true;
       }
       this.transactions.push(...resp);
+
 
     })
 

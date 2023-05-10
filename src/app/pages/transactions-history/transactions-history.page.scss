@@ -140,6 +140,26 @@ ion-note {
   font-size: 12px;
 }
 
+.no-transaction-section{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .no-transaction-section-title{
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--ion-color-dark);
+    margin-bottom: 16px;
+  }
+}
+
+.image {
+  width: 300px;
+  height: 300px;
+  align-items: center;
+}
+
 
 .loading-spinner {
   display: flex;

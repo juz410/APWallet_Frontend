@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { InstantTransferPageRoutingModule } from './instant-transfer-routing.module';
 
 import { InstantTransferPage } from './instant-transfer.page';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    InstantTransferPageRoutingModule
+    InstantTransferPageRoutingModule,
+    ScrollingModule
+
   ],
   declarations: [InstantTransferPage]
 })

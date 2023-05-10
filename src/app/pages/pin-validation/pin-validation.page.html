@@ -1,0 +1,34 @@
+
+<ion-content>
+  <div class="top-section">
+    <div  class="top-section-content">
+
+      <ion-label class="top-section-content-label-header">
+        Transaction
+      </ion-label>
+
+      <ion-label text-wrap class="top-section-content-label">
+        Proceed Your Transaction
+      </ion-label>
+       
+      </div>
+    </div>
+
+
+  <ion-card class="bottom-section">
+    <ion-card-content  class="bottom-ion-card-content">
+        <ion-item>
+          <ion-label position="stacked">Enter Your PIN Number</ion-label>
+          <code-input [isCodeHidden]="true" [codeLength]="6" (codeChanged)="onCodeChanged($event)">
+          </code-input>
+        </ion-item>
+      <div class="bottom-button-section">
+        <ion-button [disabled]="this.pinNumber.length !== 6" color='primary' class="register-button" (click)="validate()">
+          CONFIRM PIN
+        </ion-button>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+  
+</ion-content>
