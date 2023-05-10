@@ -33,6 +33,7 @@ export class TransactionsHistoryPage implements OnInit {
         this.user = user
       }
     )
+    this.currentPage = 0;
     this.transactions = [];
     this.loadTransactions();
   }
