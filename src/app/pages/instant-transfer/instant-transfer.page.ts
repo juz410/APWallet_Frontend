@@ -4,7 +4,7 @@ import { User, RecentUser } from 'src/app/interfaces/user';
 import { WsApiService } from 'src/app/services/ws-api.service';
 import { Storage } from '@ionic/storage-angular';
 import { ComponentService } from 'src/app/services/component.service';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { AlertButton, LoadingController, ModalController } from '@ionic/angular';
 import { PinValidationPage } from '../pin-validation/pin-validation.page';
 import { AesKey } from 'src/app/interfaces/aes';
 import { CryptosService } from 'src/app/services/cryptos.service';
@@ -54,13 +54,25 @@ export class InstantTransferPage implements OnInit {
       resp => {
         this.receiver = resp
         this.storeRecentUser(this.receiver)
-        this.pinValidation()
+        this.transferConfirmation()
 
       },
       err => {
         this.component.toastMessage(err.error.detail, 'danger')
       }
     )
+  }
+
+  transferConfirmation() {
+    const btn: AlertButton = {
+      text: 'Transfer',
+      cssClass: 'success',
+      handler: () => {
+        this.pinValidation()
+      }
+    };
+
+    this.component.alertMessage('Transferring', `Transferring RM${this.amount} to ${this.receiver.name}`, 'success', 'Cancel', btn);
   }
   
 
