@@ -8,6 +8,7 @@ import { CasService } from 'src/app/services/cas.service';
 import { ComponentService } from 'src/app/services/component.service';
 import { AlertButton, ModalController, NavController } from '@ionic/angular';
 import { ResetPinPage } from '../reset-pin/reset-pin.page';
+import { AdminTransactionsHistoryPage } from '../admin-transactions-history/admin-transactions-history.page';
 
 @Component({
   selector: 'app-profile',
@@ -57,6 +58,15 @@ export class ProfilePage implements OnInit {
 
     this.component.alertMessage('Warning', 'Are you sure you want to rest your PIN?', 'danger', 'Cancel', btn);
 
+  }
+
+  async adminTransactionsDialog(){
+    const modal = await this.modalCtrl.create({
+      component: AdminTransactionsHistoryPage ,
+      breakpoints: [0, 1],
+      initialBreakpoint: 1
+    });
+    await modal.present();
   }
 
   async resetPinDialog(){

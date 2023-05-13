@@ -1,0 +1,94 @@
+<ion-content>
+  <div class="top-section">
+    <div class="top-section-content">
+
+      <ion-label text-wrap class="top-section-content-label">
+        Transactions History
+      </ion-label>
+
+    </div>
+  </div>
+
+  <ion-card class="transaction-section">
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Sender ID</ion-label>
+      <ion-input [(ngModel)]="senderID"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Receiver ID</ion-label>
+      <ion-input [(ngModel)]="receiverID"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Transaction Method</ion-label>
+      <ion-select [(ngModel)]="transactionMethod">
+        <ion-select-option value="">
+          Any
+        </ion-select-option>
+        <ion-select-option *ngFor="let method of transactionMethodsOptions" [value]="method.value">
+          {{method.name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button (click)="filter()" class="filter-button" color="primary">
+      <ion-icon slot="start" name="filter-outline"></ion-icon>
+      Filter
+    </ion-button>
+    <ion-button (click)="clearFilter()" class="filter-button" color="danger">
+      <ion-icon slot="start" name="close-circle-outline"></ion-icon>
+      Clear Filter
+    </ion-button>
+
+
+    <ion-card-content>
+      <ion-list class="transaction-ion-list">
+        <ng-container *ngIf="transactions.length !== 0; else noTransactions">
+          <div>
+            <ion-card *ngFor="let transaction of transactions" class="transactions">
+              <ion-item class="ion-no-padding" lines="none">
+                <div class="labels-container">
+                  <ion-label text-wrap *ngIf="transaction.transaction_method === 'online_banking'">
+                    <span class="label-receiver">{{transaction.receiver_id}}</span> top up <span
+                      class="label-inner-bold">RM{{transaction.amount}}</span> by online banking
+                  </ion-label>
+                  <ion-label text-wrap *ngIf="transaction.transaction_method === 'card_topup'">
+                    <span class="label-receiver">{{transaction.receiver_id}}</span> top up <span
+                      class="label-inner-bold">RM{{transaction.amount}}</span> by card {{
+                    transaction.last_4_card_digits}}
+                  </ion-label>
+                  <ion-label text-wrap *ngIf="transaction.transaction_method === 'instant_transfer'">
+                    <span class="label-sender">{{transaction.sender_id}}</span> send <span
+                      class="label-inner-bold">RM{{transaction.amount}}</span> to <span
+                      class="label-receiver">{{transaction.receiver_id}}</span>
+                  </ion-label>
+                  <ion-label class="labels-date">
+                    {{ transaction.registered_at | date:'mediumDate'}}
+                  </ion-label>
+                  <ion-label class="labels-time">
+                    {{ transaction.registered_at | date:'h:mm a'}}
+
+                  </ion-label>
+                </div>
+              </ion-item>
+            </ion-card>
+          </div>
+            
+          </ng-container>
+      </ion-list>
+
+      <ion-infinite-scroll  [disabled]="isLast" (ionInfinite)="onIonInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+
+      <ng-template #noTransactions>
+        <div class="no-transaction-section">
+          <ion-label class="no-transaction-section-title">No Transactions Found</ion-label>
+          <ion-img class="image" src='assets/img/no_transaction_history.png'></ion-img>
+        </div>
+      </ng-template>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

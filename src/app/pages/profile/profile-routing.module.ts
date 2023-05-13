@@ -14,6 +14,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         loadChildren: () => import('../reset-pin/reset-pin.module').then( m => m.ResetPinPageModule)
       },
+      {
+        path: 'admin-transactions-history',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('../admin-transactions-history/admin-transactions-history.module').then( m => m.AdminTransactionsHistoryPageModule)
+      },
     ]
   }
 ];

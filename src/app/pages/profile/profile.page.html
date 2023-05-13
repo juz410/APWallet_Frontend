@@ -63,6 +63,13 @@
     <div class="separator"></div>
     <div class="settings-section">
       <ion-label class="settings-label">Settings</ion-label>
+      <ng-container *ngIf="this.user">
+        <ion-button *ngIf="this.user.role==='staff'" (click)="adminTransactionsDialog()" class="settings-button" color="primary">
+          <ion-icon slot="start" name="cash-outline"></ion-icon>
+          All Transactions (Admin)
+        </ion-button>
+      </ng-container>
+
       <ion-button (click)="resetPIN()" class="settings-button" color="primary">
         <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
         Reset PIN Number
