@@ -6,7 +6,8 @@ import { StaffProfile, StudentPhoto, User } from 'src/app/interfaces/user';
 import { Storage } from '@ionic/storage-angular';
 import { CasService } from 'src/app/services/cas.service';
 import { ComponentService } from 'src/app/services/component.service';
-import { AlertButton, NavController } from '@ionic/angular';
+import { AlertButton, ModalController, NavController } from '@ionic/angular';
+import { ResetPinPage } from '../reset-pin/reset-pin.page';
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +27,7 @@ export class ProfilePage implements OnInit {
     private cas: CasService,
     private component: ComponentService,
     private navCtrl: NavController,
+    private modalCtrl: ModalController,
   ) { }
 
   ngOnInit() {
@@ -45,7 +47,25 @@ export class ProfilePage implements OnInit {
   }
 
   resetPIN() {
-    this.component.toastMessage("STILL DEVELOPING", "danger")
+    const btn: AlertButton = {
+      text: 'Confirm',
+      cssClass: 'danger',
+      handler: () => {
+        this.resetPinDialog()
+      }
+    };
+
+    this.component.alertMessage('Warning', 'Are you sure you want to rest your PIN?', 'danger', 'Cancel', btn);
+
+  }
+
+  async resetPinDialog(){
+    const modal = await this.modalCtrl.create({
+      component: ResetPinPage ,
+      breakpoints: [0, 1],
+      initialBreakpoint: 1
+    });
+    await modal.present();
   }
 
   logoutConfirm() {
