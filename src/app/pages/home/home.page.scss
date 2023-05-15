@@ -36,7 +36,7 @@ ion-title {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 150px;
+  height: 8.5rem;
   color: var(--ion-color-light);
 }
 
@@ -117,6 +117,7 @@ ion-title {
     display: flex;
     flex-direction: column;
     padding-left: 20px;
+    font-size: 1rem;
   }
 
   .balance-change-label{
@@ -125,16 +126,31 @@ ion-title {
   }
 
   .labels-date{
-    font-size: 16px;
+    font-size: 1rem;
     color: var(--ion-color-primary)
   }
 
   .labels-time{
     color: var(--ion-color-medium);
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: lighter;
 
   }
+}
+
+cdk-virtual-scroll-viewport {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.bottom-viewport {
+  height: 100%;
+  width: 100%;
+
+}
+
+.bottom-ion-card-content {
+  height: 100%;
 }
 
 .no-transaction-section{

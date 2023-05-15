@@ -67,7 +67,7 @@
                           ************{{card.card_number.slice(-4)}}
                         </ion-label>
                       </div>
-                      <ion-button [disabled]="amount < 10" (click)="topupCard(card)" color="medium" fill="clear" slot="end">
+                      <ion-button [disabled]="amount < 10" (click)="topupCardConfirm(card)" color="medium" fill="clear" slot="end">
                         <ion-icon size="large" name="chevron-forward-outline"></ion-icon>
                       </ion-button>
                     </ion-item>
@@ -108,7 +108,7 @@
                           {{bank.name}}
                         </label>
                       </div>
-                      <ion-button [disabled]="amount < 10" (click)="topupBank(bank)" color="medium" fill="clear" slot="end">
+                      <ion-button [disabled]="amount < 10" (click)="topupBankConfirm(bank)" color="medium" fill="clear" slot="end">
                         <ion-icon size="large" name="chevron-forward-outline"></ion-icon>
                       </ion-button>
                     </ion-item>

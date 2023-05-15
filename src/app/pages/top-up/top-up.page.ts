@@ -3,7 +3,7 @@ import { Card, User } from 'src/app/interfaces/user';
 import { WsApiService } from 'src/app/services/ws-api.service';
 import { Storage } from '@ionic/storage-angular';
 import { Observable } from 'rxjs';
-import { NavController, LoadingController } from '@ionic/angular';
+import { NavController, LoadingController, AlertButton } from '@ionic/angular';
 import { banks, Bank } from 'src/app/interfaces/bank';
 import { ComponentService } from 'src/app/services/component.service';
 
@@ -51,6 +51,18 @@ export class TopUpPage implements OnInit {
     this.topupMethod = event.detail.value;
   }
 
+  topupCardConfirm(card){
+    const btn: AlertButton = {
+      text: 'Topup',
+      cssClass: 'success',
+      handler: () => {
+        this.topupCard(card)
+      }
+    };
+
+    this.component.alertMessage('Topping Up', `Topping up RM${this.amount} with card ${card.card_number.slice(-4)}`, 'success', 'Cancel', btn);
+  }
+
   async topupCard(card){
     const loading = await this.loadingCtrl.create({
       message: 'Topping Up....',
@@ -80,7 +92,19 @@ export class TopUpPage implements OnInit {
     )
   }
 
-  async topupBank(bank){
+  topupBankConfirm(bank: Bank){
+    const btn: AlertButton = {
+      text: 'Topup',
+      cssClass: 'success',
+      handler: () => {
+        this.topupBank(bank)
+      }
+    };
+
+    this.component.alertMessage('Topping Up', `Topping up RM${this.amount} with ${bank.name}`, 'success', 'Cancel', btn);
+  }
+
+  async topupBank(bank: Bank){
     const loading = await this.loadingCtrl.create({
       message: 'Topping Up....',
       spinner: 'bubbles',

@@ -12,7 +12,7 @@
   <ion-card class="bottom-section">
     <ng-container *ngIf="this.user">
       <ion-card class="bottom-contents">
-        <ion-item class="ion-no-padding" lines="none">
+        <ion-item class="ion-no-padding avatar-section" lines="none">
           <ion-avatar tappable="true" class="ion-margin avatar">
             <!-- Student Profile Picture -->
 
@@ -33,10 +33,10 @@
             </ng-template>
           </ion-avatar>
           <div class="bottom-labels-container">
-            <label class="bottom-labels-name">
+            <label text-wrap class="bottom-labels-name">
               {{this.user.name}}
             </label>
-            <ion-label class="bottom-labels-email">
+            <ion-label text-wrap class="bottom-labels-email">
               {{this.user.email}}
             </ion-label>
           </div>
@@ -57,14 +57,14 @@
           {{this.user.registered_at | date: 'mediumDate'}}
         </ion-label>
       </div>
-      <!-- <hr style="height:2px;border-width:0;color:gray;background-color:gray"> -->
 
     </ng-container>
     <div class="separator"></div>
     <div class="settings-section">
       <ion-label class="settings-label">Settings</ion-label>
       <ng-container *ngIf="this.user">
-        <ion-button *ngIf="this.user.role==='staff'" (click)="adminTransactionsDialog()" class="settings-button" color="primary">
+        <ion-button *ngIf="this.user.role==='staff'" (click)="adminTransactionsDialog()" class="settings-button"
+          color="primary">
           <ion-icon slot="start" name="cash-outline"></ion-icon>
           All Transactions (Admin)
         </ion-button>

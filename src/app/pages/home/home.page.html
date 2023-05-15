@@ -32,12 +32,12 @@
         </ion-fab-button>
         <ion-text class="button-text">Transfer</ion-text>
       </div>
-      <div>
+      <!-- <div>
         <ion-fab-button class="home-page-button" (click)="qrPage()" color="main-page-button" size="small">
           <ion-icon name="qr-code-outline"></ion-icon>
         </ion-fab-button>
         <ion-text class="button-text">QR Code</ion-text>
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -51,68 +51,71 @@
         </ion-button>
       </div>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content class="bottom-ion-card-content">
+      <cdk-virtual-scroll-viewport class="bottom-viewport" itemSize="56" minBufferPx="900" maxBufferPx="1350">
       <ion-list *ngIf="user; else loadingTransactions" class="transaction-ion-list">
         <ng-container *ngIf="transactions$ | async as transactions  ; else loadingTransactions">
           <ng-container *ngIf="transactions.length !== 0; else noTransactions">
 
-          
-          <ion-card *ngFor="let transaction of transactions.slice(0,3)" class="transactions">
-            <ion-item class="ion-no-padding" lines="none">
-              <ng-container *ngIf="transaction.receiver_id===user.user_id">
-                <ion-icon color="success" name="arrow-down-outline"></ion-icon>
-                <div class="labels-container">
-                  <ion-label *ngIf="transaction.transaction_method === 'online_banking'">
-                    Top up by online banking
-                  </ion-label>
-                  <ion-label *ngIf="transaction.transaction_method === 'card_topup'">
-                    Top up by card {{ transaction.last_4_card_digits}}
-                  </ion-label>
-                  <ion-label text-wrap *ngIf="transaction.transaction_method === 'instant_transfer'">
-                    Received from {{ transaction.sender.name}}
-                  </ion-label>
-                  <ion-label class="labels-date">
-                    {{ transaction.registered_at | date:'mediumDate'}}
-                  </ion-label>
-                  <ion-label class="labels-time">
-                    {{ transaction.registered_at | date:'h:mm a'}}
+              <ion-card *ngFor="let transaction of transactions.slice(0,3)" class="transactions">
+                <ion-item class="ion-no-padding" lines="none">
+                  <ng-container *ngIf="transaction.receiver_id===user.user_id">
+                    <ion-icon size="large" color="success" name="arrow-down-outline"></ion-icon>
+                    <div class="labels-container">
+                      <ion-label *ngIf="transaction.transaction_method === 'online_banking'">
+                        Top up by online banking
+                      </ion-label>
+                      <ion-label *ngIf="transaction.transaction_method === 'card_topup'">
+                        Top up by card {{ transaction.last_4_card_digits}}
+                      </ion-label>
+                      <ion-label text-wrap *ngIf="transaction.transaction_method === 'instant_transfer'">
+                        Received from {{ transaction.sender.name}}
+                      </ion-label>
+                      <ion-label class="labels-date">
+                        {{ transaction.registered_at | date:'mediumDate'}}
+                      </ion-label>
+                      <ion-label class="labels-time">
+                        {{ transaction.registered_at | date:'h:mm a'}}
 
-                  </ion-label>
-                </div>
+                      </ion-label>
+                    </div>
 
-                <ion-label color="success" class="balance-change-label" slot="end">
-                  + {{transaction.amount}}
-                </ion-label>
-              </ng-container>
-              <ng-container *ngIf="transaction.sender_id===user.user_id">
-                <ion-icon color="danger" name="arrow-up-outline"></ion-icon>
-                <div class="labels-container">
-                  <ion-label text-wrap *ngIf="transaction.transaction_method === 'instant_transfer'">
-                    Transfer to {{ transaction.receiver.name}}
-                  </ion-label>
-                  <ion-label>
-                    {{ transaction.registered_at | date:'mediumDate'}}
-                  </ion-label>
-                  <ion-label>
-                    {{ transaction.registered_at | date:'h:mm a'}}
-                  </ion-label>
-                </div>
+                    <ion-label color="success" class="balance-change-label" slot="end">
+                      + {{transaction.amount}}
+                    </ion-label>
+                  </ng-container>
+                  <ng-container *ngIf="transaction.sender_id===user.user_id">
+                    <ion-icon size="large" color="danger" name="arrow-up-outline"></ion-icon>
+                    <div class="labels-container">
+                      <ion-label text-wrap *ngIf="transaction.transaction_method === 'instant_transfer'">
+                        Transfer to {{ transaction.receiver.name}}
+                      </ion-label>
+                      <ion-label class="labels-date">
+                        {{ transaction.registered_at | date:'mediumDate'}}
+                      </ion-label>
+                      <ion-label class="labels-time">
+                        {{ transaction.registered_at | date:'h:mm a'}}
+                      </ion-label>
+                    </div>
 
-                <ion-label color="danger" class="balance-change-label" slot="end">
-                  - {{transaction.amount}}
-                </ion-label>
-              </ng-container>
-            </ion-item>
-          </ion-card>
-        </ng-container>
-        <ng-template #noTransactions>
-          <div class="no-transaction-section">
-            <ion-label class="no-transaction-section-title">No Transactions Found</ion-label>
-            <ion-img class="image" src='assets/img/no_transaction_history.png'></ion-img>
-          </div>
-        </ng-template>
+                    <ion-label color="danger" class="balance-change-label" slot="end">
+                      - {{transaction.amount}}
+                    </ion-label>
+                  </ng-container>
+                </ion-item>
+              </ion-card>
+
+          </ng-container>
+          <ng-template #noTransactions>
+            <div class="no-transaction-section">
+              <ion-label class="no-transaction-section-title">No Transactions Found</ion-label>
+              <ion-img class="image" src='assets/img/no_transaction_history.png'></ion-img>
+            </div>
+          </ng-template>
         </ng-container>
       </ion-list>
+    </cdk-virtual-scroll-viewport>
+
       <ng-template #loadingTransactions>
         <div class="loading-spinner">
           <ion-spinner color="primary"></ion-spinner>

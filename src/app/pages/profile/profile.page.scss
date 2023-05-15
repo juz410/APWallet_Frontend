@@ -9,6 +9,10 @@ ion-content {
 
 }
 
+.avatar-section{
+  overflow: initial;
+}
+
 
 ion-header {
   display: flex;
@@ -131,18 +135,18 @@ ion-title {
   .bottom-labels-container {
     display: flex;
     flex-direction: column;
-    padding-left: 40px;
+    // padding-left: 40px;
   }
 
   .bottom-labels-email{
     color: var(--ion-color-medium);
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: lighter;
 
   }
 
   .bottom-labels-name{
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: bold;
   }
 
@@ -172,9 +176,9 @@ ion-title {
 }
 
 .avatar {
-  width: 80px;
-  height: 80px;
-  padding: 3px;
+  width: 5rem;
+  height: 5rem;
+  padding: 0.188rem;
 
 }
 
