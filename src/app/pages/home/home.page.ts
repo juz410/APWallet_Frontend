@@ -3,6 +3,7 @@ import { Observable, observable } from 'rxjs';
 import { User } from 'src/app/interfaces/user';
 import { WsApiService } from 'src/app/services/ws-api.service';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ export class HomePage implements OnInit {
 
   constructor(
     private ws: WsApiService,
-    private router: Router
+    private router: Router,
+    private storage: Storage
   ) { }
 
   ionViewWillEnter(){
@@ -28,9 +30,18 @@ export class HomePage implements OnInit {
     this.user$.subscribe(
       user => {
         this.user = user
+        this.storage.set('user', user);
+
       }
     )
     this.transactions$ = this.ws.get<any>(`/transaction/user`)
+  }
+
+  refresh(refresher?){
+    this.ionViewWillEnter();
+    if(refresher){
+      refresher.target.complete();
+    }
   }
 
   ngOnInit() {
