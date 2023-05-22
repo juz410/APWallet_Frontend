@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost:8000',
+  url: 'http://kokfeengtan.me',
   pictureUrl: 'https://api.apiit.edu.my'
 };
 
