@@ -1,5 +1,7 @@
 {
   "name": "apwallet",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

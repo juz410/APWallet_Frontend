@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  url: 'https://kokfeengtan.me',
+  pictureUrl: 'https://api.apiit.edu.my'
 };
