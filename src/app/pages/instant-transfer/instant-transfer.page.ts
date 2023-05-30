@@ -8,7 +8,9 @@ import { AlertButton, LoadingController, ModalController } from '@ionic/angular'
 import { PinValidationPage } from '../pin-validation/pin-validation.page';
 import { AesKey } from 'src/app/interfaces/aes';
 import { CryptosService } from 'src/app/services/cryptos.service';
-
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-instant-transfer',
@@ -20,9 +22,10 @@ export class InstantTransferPage implements OnInit {
   recentUsers: RecentUser[] = []
   receiver: User
   receiver$: Observable<User>
-  receiverID: string;
-  amount: number;
+  // receiverID: string;
+  // amount: number;
   user: User;
+  transferForm: FormGroup;
 
   constructor(
     private ws: WsApiService,
@@ -30,9 +33,15 @@ export class InstantTransferPage implements OnInit {
     private component: ComponentService,
     private modalCtrl: ModalController,
     private loadingCtrl: LoadingController,
-    private crypto: CryptosService
+    private crypto: CryptosService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder
 
-  ) { }
+  ) { 
+
+
+  }
 
   ionViewWillEnter(){
     this.getRecentUsers()
@@ -43,12 +52,36 @@ export class InstantTransferPage implements OnInit {
     )
   }
 
-
-  ngOnInit() {
+  ionViewDidEnter(){
+    this.route.queryParams.subscribe(params => {
+      const userId = params['userId']
+      // this.receiverID = userId
+      this.transferForm.controls['receiverID'].setValue(userId)
+    });
   }
 
+
+  ngOnInit() {
+    this.transferForm = this.formBuilder.group(
+      {
+        receiverID: ['',[Validators.required]],
+        amount: [0,[Validators.required, Validators.pattern("^[0-9]*\.?[0-9]*$")] ]
+      }
+    )
+  }
+
+  numericOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+      return false;
+    }
+    return true;
+  }
+  
+  
   transferCheck() {
-    this.receiver$ = this.ws.get<User>(`/user/search?user_id=${this.receiverID}`)
+    const receiverID = this.transferForm.value.receiverID
+    this.receiver$ = this.ws.get<User>(`/user/search?user_id=${receiverID}`)
 
     this.receiver$.subscribe(
       resp => {
@@ -64,6 +97,7 @@ export class InstantTransferPage implements OnInit {
   }
 
   transferConfirmation() {
+    const amount = this.transferForm.value.amount
     const btn: AlertButton = {
       text: 'Transfer',
       cssClass: 'success',
@@ -72,7 +106,7 @@ export class InstantTransferPage implements OnInit {
       }
     };
 
-    this.component.alertMessage('Transferring', `Transferring RM${this.amount} to ${this.receiver.name}`, 'success', 'Cancel', btn);
+    this.component.alertMessage('Transferring', `Transferring RM${amount} to ${this.receiver.name}`, 'success', 'Cancel', btn);
   }
   
 
@@ -96,6 +130,8 @@ export class InstantTransferPage implements OnInit {
   }
 
   async transfer(pinNumber: string) {
+    const amount = this.transferForm.value.amount
+    const receiverID = this.transferForm.value.receiverID
     const loading = await this.loadingCtrl.create({
       message: 'Transferring....',
       spinner: 'bubbles',
@@ -116,7 +152,7 @@ export class InstantTransferPage implements OnInit {
     const userBody = {
       "pin_number": encryptedPIN,
       "receiver_id": this.receiver.user_id,
-      "amount": this.amount,
+      "amount": amount,
       "transaction_method": "instant_transfer",
       "aes_key": encrypted_aesKey,
     }
@@ -124,8 +160,8 @@ export class InstantTransferPage implements OnInit {
     this.ws.post<any>(`/transaction/`,{body: userBody}).subscribe(
       resp => {
         loading.dismiss()
-        this.component.toastMessage(`Transfered RM${this.amount} to ${this.receiver.name}`, 'success')
-        this.user.balance -= this.amount
+        this.component.toastMessage(`Transfered RM${amount} to ${this.receiver.name}`, 'success')
+        this.user.balance -= amount
         this.storage.set('user', this.user);
       },
       err => {
@@ -137,7 +173,7 @@ export class InstantTransferPage implements OnInit {
   }
 
   quickTransfer(receiverID: string){
-    this.receiverID = receiverID;
+    this.transferForm.controls['receiverID'].setValue(receiverID);
     this.transferCheck()
   }
 

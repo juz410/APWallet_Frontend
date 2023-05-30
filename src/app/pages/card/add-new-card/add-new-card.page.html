@@ -25,7 +25,7 @@
       <form [formGroup]="this.addNewCardForm">
         <ion-item>
           <ion-label position="stacked">Card Number*</ion-label>
-          <ion-input pattern="^[0-9]*$" maxlength="16" formControlName="cardNumber"></ion-input>
+          <ion-input type="text" pattern="[0-9]*" (keypress)="numericOnly($event)" maxlength="16" formControlName="cardNumber"></ion-input>
         </ion-item>
         <ion-row>
           <ion-item>

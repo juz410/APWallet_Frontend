@@ -1,0 +1,26 @@
+<ion-content>
+  <div class="top-section">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="/tabs/home">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-back-button>
+      <ion-title>QR Code</ion-title>
+    </ion-buttons>
+  </div>
+
+
+  <ion-card class="bottom-section">
+    <ion-card-content class="bottom-ion-card-content"
+      class="bottom-ion-card-content">
+      <ng-container *ngIf="this.scan">
+        <div class="scan-box" *ngIf="this.scan"></div>
+      </ng-container>
+      <ng-container *ngIf="user">
+        <ion-card class="qrcode-ion-card">
+          <ion-label class="qr-code-label">{{user.name}}</ion-label>
+          <qrcode [qrdata]="user.user_id" [width]="400"></qrcode>
+        </ion-card>
+      </ng-container>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

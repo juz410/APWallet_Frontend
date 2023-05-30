@@ -35,12 +35,18 @@
         </ion-fab-button>
         <ion-text class="button-text">Transfer</ion-text>
       </div>
-      <!-- <div>
+      <div *ngIf="this.isCapacitor">
+        <ion-fab-button class="home-page-button" (click)="scanQRPage()" color="main-page-button" size="small">
+          <ion-icon name="scan-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-text class="button-text">Scan</ion-text>
+      </div>
+      <div *ngIf="this.isCapacitor">
         <ion-fab-button class="home-page-button" (click)="qrPage()" color="main-page-button" size="small">
           <ion-icon name="qr-code-outline"></ion-icon>
         </ion-fab-button>
         <ion-text class="button-text">QR Code</ion-text>
-      </div> -->
+      </div>
     </div>
   </div>
 

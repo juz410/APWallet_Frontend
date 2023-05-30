@@ -24,22 +24,30 @@
       </div>
 
     </ion-card-header>
-    <ion-item>
-      <ion-label position="stacked">Receiver Username</ion-label>
-      <ion-input [(ngModel)]="receiverID"></ion-input>
-    </ion-item>
-    <ion-item>
+    <form [formGroup]="this.transferForm">
 
-      <ion-label position="stacked">Amount</ion-label>
+      <ion-item>
+        <ion-label position="stacked">Receiver Username</ion-label>
+        <ion-input formControlName="receiverID"></ion-input>
+      </ion-item>
+      <ion-item>
 
-      <ion-input [(ngModel)]="this.amount" inputmode="numeric" type="number">
-        <span style="margin-right:10px">
-          RM
-        </span>
-      </ion-input>
-    </ion-item>
+        <ion-label position="stacked">Amount</ion-label>
 
-    <ion-button [disabled]="!this.amount" (click)="transferCheck()" class="transfer-button" color="primary">
+        <ion-input formControlName="amount" type="number">
+          <span style="margin-right:10px">
+            RM
+          </span>
+        </ion-input>
+      </ion-item>
+    </form>
+
+
+    <ion-button [disabled]="!this.transferForm.value.amount || 
+          !this.transferForm.valid || 
+          this.transferForm.value.amount <= 0 " 
+      (click)="transferCheck()"
+      class="transfer-button" color="primary">
       <ion-icon slot="start" name="paper-plane-outline"></ion-icon>
       Transfer
     </ion-button>
@@ -62,7 +70,9 @@
                   {{user.user_id}}
                 </ion-label>
               </div>
-              <ion-button (click)="quickTransfer(user.user_id)" [disabled]="!this.amount" color="medium" fill="clear" slot="end">
+              <ion-button (click)="quickTransfer(user.user_id)"
+                [disabled]="!this.transferForm.value.amount || !this.transferForm.valid || this.transferForm.value.amount <= 0 " color="medium" fill="clear"
+                slot="end">
                 <ion-icon size="large" name="chevron-forward-outline"></ion-icon>
               </ion-button>
             </ion-item>

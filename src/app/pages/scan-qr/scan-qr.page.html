@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      Scan QR Code
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [style.--background]="scan ? '#00000000' : undefined">
+  <div class="scan-box" *ngIf="scan"></div>
+</ion-content>

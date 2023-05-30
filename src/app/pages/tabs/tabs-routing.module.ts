@@ -50,6 +50,17 @@ const routes: Routes = [
         loadChildren: () => import('../top-up/top-up.module').then(m => m.TopUpPageModule)
       },
       {
+        path: 'qr-code',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('../qr-code/qr-code.module').then( m => m.QrCodePageModule)
+      },
+      {
+        path: 'scan-qr',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('../scan-qr/scan-qr.module').then( m => m.ScanQrPageModule)
+      },
+    
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'

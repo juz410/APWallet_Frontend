@@ -4,6 +4,7 @@ import { User } from 'src/app/interfaces/user';
 import { WsApiService } from 'src/app/services/ws-api.service';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -16,12 +17,15 @@ export class HomePage implements OnInit {
   user: User;
   transactions: any = []
   transactions$: Observable<any>;
+  isCapacitor: boolean;
 
 
   constructor(
     private ws: WsApiService,
     private router: Router,
-    private storage: Storage
+    private storage: Storage,
+    public plt: Platform,
+
   ) { }
 
   ionViewWillEnter(){
@@ -45,6 +49,7 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+    this.isCapacitor = this.plt.is('capacitor');
     
   }
 
@@ -61,7 +66,11 @@ export class HomePage implements OnInit {
   }
 
   qrPage(){
-    // this.router.navigateByUrl('/qr')
+    this.router.navigateByUrl('/tabs/qr-code')
+  }
+
+  scanQRPage(){
+    this.router.navigateByUrl('/tabs/scan-qr')
   }
 
 }
